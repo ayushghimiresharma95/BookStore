@@ -15,8 +15,8 @@ public class BookStoreApplication {
 		SpringApplication.run(BookStoreApplication.class, args);
 	}
 
-	@Bean
-	public CommandLineRunner demo(BookstoreRepositary repositary) {
+    @Bean
+    CommandLineRunner demo(BookstoreRepositary repositary) {
 		return (args) -> {
 			Book b1 = new Book("the perk of being a wallpaper", "stephen chbosky", 1999, 23, 7223);
 		Book b2 = new Book("harry potter", "jk rowling", 1997, 23, 7224);

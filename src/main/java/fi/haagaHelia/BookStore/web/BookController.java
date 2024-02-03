@@ -3,6 +3,7 @@ package fi.haagaHelia.BookStore.web;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import fi.haagaHelia.BookStore.Domain.Book;
+import fi.haagaHelia.BookStore.Domain.BookstoreRepositary;
 
 
 
@@ -20,18 +22,18 @@ import fi.haagaHelia.BookStore.Domain.Book;
 @Controller
 public class BookController {
 
-    List<Book> books = new ArrayList<Book>() ;
+    @Autowired
+    private BookstoreRepositary respositary ;
 
     @GetMapping("/index")
     public String AddingBooks(Model model) {
         model.addAttribute("books", new Book()) ;
         return "BookForm" ;
     }    
-    @PostMapping("/index")
-    public String postBooks( @ModelAttribute Book book, Model model){
-        
-        this.books.add(book) ;
-        model.addAttribute("books", this.books) ;
-        return "BookTable" ;
+    
+    @GetMapping("/booklist")
+    public String getBooklist(Model model){
+        model.addAttribute("booklist", respositary.findAll());
+        return "Booklist" ;
     }
 }
