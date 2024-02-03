@@ -1,20 +1,21 @@
 package fi.haagaHelia.BookStore.Domain;
 
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
+@Entity
 public class Book {
     
-	
-    @Size(min=5, max=30)
+	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+    
     private String title ;
-
-    @Size(min=5, max=30)
     private String author ;
-    private int year ;
+    private int years ;
     private int price ;
-
-    @NotNull
     private int isbn ;
 
     public String getTitle() {
@@ -29,8 +30,8 @@ public class Book {
     public int getIsbn() {
         return this.isbn ;
     }
-    public int getYear(){
-        return this.year ;
+    public int getYears(){
+        return this.years ;
     }
     public void setAuthor(String author){
         this.author = author ;
