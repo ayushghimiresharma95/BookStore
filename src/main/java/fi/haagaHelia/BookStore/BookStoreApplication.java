@@ -18,9 +18,9 @@ public class BookStoreApplication {
     @Bean
     CommandLineRunner demo(BookstoreRepositary repositary) {
 		return (args) -> {
-			Book b1 = new Book("the perk of being a wallpaper", "stephen chbosky", 1999, 23, 7223);
-		Book b2 = new Book("harry potter", "jk rowling", 1997, 23, 7224);
-		Book b3 = new Book("War and peace", "leo tolstoy", 1868, 34, 7225);
+			Book b1 = new Book("the perk of being a wallpaper", "stephen chbosky", "1997", "23", "223");
+		Book b2 = new Book("harry potter", "jk rowling", "1997", "34", "334");
+		Book b3 = new Book("War and peace", "leo tolstoy", "1997", "223","345");
 		repositary.save(b1) ;
 		repositary.save(b2) ;
 		repositary.save(b3) ;

@@ -4,10 +4,12 @@
 <head>
     <meta charset="UTF-8" />
     <title>Friend List</title>
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
 </head>
 
 <body>
-    <table border="1">
+    <h1>Book List</h1>
+    <table border="1" class="table table-striped">
         <thead>
             <tr>
                 <th>Author</th>
@@ -26,12 +28,15 @@
                 <td th:text="${book.isbn}"></td>
                 <td th:text="${book.price}"></td>
                 <td>
-                    <a th:href="@{/delete/{id}(id=${book.id})}">Delete</a>
+                    <a class="btn btn-danger"  th:href="@{/delete/{id}(id=${book.id})}">Delete</a>
+                </td>
+                <td>
+                    <a class="btn btn-success" th:href="@{/{id}(id=${book.id})}">Edit</a>
                 </td>
             </tr>
         </tbody>
     </table>
-    <a href="/index">Insert New Book</a>
+    <a class="btn btn-success" href="/add">Insert New Book</a>
 
 </body>
 

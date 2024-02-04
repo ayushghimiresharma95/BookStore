@@ -5,8 +5,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<h1>Form</h1>
-    <form action="#" th:action="@{save}" th:object="${book}" method="post">
+	<h1>Edit Book</h1>
+    <form action="#" th:action="@{'/edit/'+${book.id}}" th:object="${book}" method="post">
     	<table>
     	<tr>
     		<td>Author: <input type="text" th:field="*{author}" /></td>
@@ -26,7 +26,7 @@
         </tr>
         
         </table>
-        <p><input type="submit" value="Save" /></p>
+        <p><input type="submit" value="Edit" /></p>
     </form>
     
 </body>

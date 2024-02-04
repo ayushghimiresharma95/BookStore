@@ -14,10 +14,37 @@ public class Book {
 
     private String title;
     private String author;
-    private int years;
-    private int price;
-    private int isbn;
+    private String years;
+    private String price;
+    private String isbn;
     
+    public Book() {
+    }
+
+    public String getYears() {
+        return years;
+    }
+
+    public void setYears(String years) {
+        this.years = years;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    public Book(String title, String author, String years, String price, String isbn) {
+        super() ;
+        this.title = title;
+        this.author = author;
+        this.years = years;
+        this.price = price;
+        this.isbn = isbn;
+    }
 
     public long getId() {
         return id;
@@ -28,36 +55,20 @@ public class Book {
     }
 
     public String getTitle() {
-        return this.title;
+        return title;
     }
 
     public String getAuthor() {
-        return this.author;
+        return author;
     }
 
-    public Book() {
+    public String getPrice() {
+        return price;
     }
 
-    public Book(String title, String author, int years, int price, int isbn) {
-        super() ;
-        this.title = title;
-        this.author = author;
-        this.years = years;
-        this.price = price;
-        this.isbn = isbn;
-    }
+    
 
-    public int getPrice() {
-        return this.price;
-    }
-
-    public int getIsbn() {
-        return this.isbn;
-    }
-
-    public int getYears() {
-        return this.years;
-    }
+    
 
     public void setAuthor(String author) {
         this.author = author;
@@ -67,17 +78,12 @@ public class Book {
         this.title = title;
     }
 
-    public void setISBN(int isbn) {
-        this.isbn = isbn;
-    }
-
-    public void setPrice(int price) {
+    
+    public void setPrice(String price) {
         this.price = price;
     }
 
-    public void setYear(int years) {
-        this.years = years;
-    }
+    
 
     @Override
     public String toString() {
