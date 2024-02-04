@@ -17,6 +17,15 @@ public class Book {
     private int years;
     private int price;
     private int isbn;
+    
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return this.title;
@@ -66,8 +75,8 @@ public class Book {
         this.price = price;
     }
 
-    public void setYear(int year) {
-        this.year = year;
+    public void setYear(int years) {
+        this.years = years;
     }
 
     @Override

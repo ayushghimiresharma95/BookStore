@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import fi.haagaHelia.BookStore.Domain.Book;
@@ -34,6 +35,22 @@ public class BookController {
     @GetMapping("/booklist")
     public String getBooklist(Model model){
         model.addAttribute("booklist", respositary.findAll());
-        return "Booklist" ;
+        return "booklist" ;
+    }
+    @GetMapping("/delete/{id}")
+    public String deleteBook(@PathVariable("id") Long bookId, Model model)
+    {
+        respositary.deleteById(bookId);
+        return "redirect:../booklist";
+    }
+    @GetMapping("/add")
+    public String addBook(Model model){
+        model.addAttribute("book", new Book()) ;
+        return "addBook"    ;
+    }
+    @PostMapping("/save")
+    public String savebook(Book book){
+        respositary.save(book)  ;
+        return "redirect:booklist" ;
     }
 }
