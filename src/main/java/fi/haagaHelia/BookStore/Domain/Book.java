@@ -1,9 +1,13 @@
 package fi.haagaHelia.BookStore.Domain;
 
+
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Book {
@@ -13,13 +17,35 @@ public class Book {
     private long id;
 
     private String title;
+    
+
     private String author;
     private String years;
     private String price;
     private String isbn;
-    
+
+    @ManyToOne
+    @JoinColumn(name = "categoryId")
+    private Category category;
+
     public Book() {
     }
+    public Book(String title, String author, String years, String price, String isbn) {
+        this.title = title;
+        this.author = author;
+        this.years = years;
+        this.price = price;
+        this.isbn = isbn;
+    }
+    public Book(String title, String author, String years, String price, String isbn, Category category) {
+        this.title = title;
+        this.author = author;
+        this.years = years;
+        this.price = price;
+        this.isbn = isbn;
+        this.category = category;
+    }
+
 
     public String getYears() {
         return years;
@@ -37,14 +63,7 @@ public class Book {
         this.isbn = isbn;
     }
 
-    public Book(String title, String author, String years, String price, String isbn) {
-        super() ;
-        this.title = title;
-        this.author = author;
-        this.years = years;
-        this.price = price;
-        this.isbn = isbn;
-    }
+    
 
     public long getId() {
         return id;
@@ -66,10 +85,6 @@ public class Book {
         return price;
     }
 
-    
-
-    
-
     public void setAuthor(String author) {
         this.author = author;
     }
@@ -78,15 +93,26 @@ public class Book {
         this.title = title;
     }
 
-    
     public void setPrice(String price) {
         this.price = price;
     }
 
-    
+    public Category getCategory() {
+        return category;
+    }
 
     @Override
     public String toString() {
-        return "Message [msg=" + "]";
+        if (this.category != null){
+            return "Book [id=" + id + ", title=" + title + ", author=" + author + ", years=" + years + ", price=" + price
+            + ", isbn=" + isbn + ", category=" + category + "]" ;
+        }
+        else 
+            return "Book [id=" + id + ", title=" + title + ", author=" + author + ", years=" + years + ", price=" + price
+                    + ", isbn=" + isbn + "]";
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }
