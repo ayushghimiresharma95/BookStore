@@ -17,7 +17,7 @@ public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO) 
-    private long id;
+    private long categoryid;
     private String name;
 
 
@@ -32,36 +32,29 @@ public class Category {
         super() ;
         this.name = name;
     }
-    public List<Book> getBook() {
-        return books;
-    }
-
-    public void setBook(List<Book> book) {
-        this.books = book;
-    }
-
+   
     
-
-    public long getId() {
-        return id;
+    public long getCategoryid() {
+        return categoryid;
     }
-
-    public void setId(long id) {
-        this.id = id;
+    public void setCategoryid(long categoryid) {
+        this.categoryid = categoryid;
     }
-
-    
-
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
-    } 
+    }
+    public List<Book> getBooks() {
+        return books;
+    }
+    public void setBooks(List<Book> books) {
+        this.books = books;
+    }
     @Override
     public String toString() {
-        return "Category [id=" + id + ", books=" + books + ", name=" + name + "]";
+        return "Category [id=" + categoryid + ", books=" + books + ", name=" + name + "]";
     }
 
 }

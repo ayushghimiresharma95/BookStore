@@ -2,6 +2,9 @@ package fi.haagaHelia.BookStore.web;
 
 
 
+
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,13 +14,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import fi.haagaHelia.BookStore.Domain.Book;
 import fi.haagaHelia.BookStore.Domain.BookstoreRepositary;
+import fi.haagaHelia.BookStore.Domain.Category;
 import fi.haagaHelia.BookStore.Domain.CategoryRepositary;
 
 @Controller
 public class BookController {
 
     @Autowired
-    private BookstoreRepositary respositary;
+    private BookstoreRepositary repositary;
     @Autowired
     private CategoryRepositary cRepositary;
 
@@ -29,13 +33,13 @@ public class BookController {
 
     @GetMapping("/booklist")
     public String getBooklist(Model model) {
-        model.addAttribute("booklist", respositary.findAll());
+        model.addAttribute("booklist", repositary.findAll());
         return "booklist";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteBook(@PathVariable("id") Long bookId, Model model) {
-        respositary.deleteById(bookId);
+        repositary.deleteById(bookId);
         return "redirect:../booklist";
     }
 
@@ -51,30 +55,21 @@ public class BookController {
         System.out.println(book.getId());
         
 
-        respositary.save(book);
+        repositary.save(book);
         return "redirect:booklist";
     }
-    @PostMapping("/edit/{id}")
-    public String editBook(@PathVariable Long id, Book book){
-        Book getBook = respositary.findById(book.getId()).orElse(null);
-
-       
-        getBook.setAuthor(book.getAuthor());
-        getBook.setTitle(book.getTitle());
-        getBook.setIsbn(book.getIsbn());
-        getBook.setYears(book.getYears());
-        getBook.setPrice(book.getPrice());
-        getBook.setCategory(book.getCategory());
-        respositary.deleteById(book.getId());
-        respositary.save(getBook);
-        return "redirect:/booklist";
-
-        
-    }
-
-    @GetMapping("/{id}")
+    
+    @GetMapping("/edit/{id}")
     public String getBookById(@PathVariable("id") Long bookId, Model model) {
-        model.addAttribute("book", respositary.findById(bookId).orElse(null));
-        return "editBook";
+        Book book = repositary.findById(bookId).orElse(null);
+        
+        if (book != null) {
+            model.addAttribute("book", book);
+            model.addAttribute("categorys",cRepositary.findAll() );
+            
+            return "editBook";
+        } else {
+            return "redirect:/booklist";
+        }
     }
 }

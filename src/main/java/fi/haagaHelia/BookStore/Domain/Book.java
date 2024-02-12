@@ -1,7 +1,5 @@
 package fi.haagaHelia.BookStore.Domain;
 
-
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,7 +15,6 @@ public class Book {
     private long id;
 
     private String title;
-    
 
     private String author;
     private String years;
@@ -25,11 +22,12 @@ public class Book {
     private String isbn;
 
     @ManyToOne
-    @JoinColumn(name = "categoryId")
+    @JoinColumn(name = "categoryid")
     private Category category;
 
     public Book() {
     }
+
     public Book(String title, String author, String years, String price, String isbn) {
         this.title = title;
         this.author = author;
@@ -37,6 +35,7 @@ public class Book {
         this.price = price;
         this.isbn = isbn;
     }
+
     public Book(String title, String author, String years, String price, String isbn, Category category) {
         this.title = title;
         this.author = author;
@@ -46,6 +45,13 @@ public class Book {
         this.category = category;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getYears() {
         return years;
@@ -63,24 +69,6 @@ public class Book {
         this.isbn = isbn;
     }
 
-    
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
     public String getPrice() {
         return price;
     }
@@ -93,6 +81,14 @@ public class Book {
         this.title = title;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
     public void setPrice(String price) {
         this.price = price;
     }
@@ -103,12 +99,13 @@ public class Book {
 
     @Override
     public String toString() {
-        if (this.category != null){
-            return "Book [id=" + id + ", title=" + title + ", author=" + author + ", years=" + years + ", price=" + price
-            + ", isbn=" + isbn + ", category=" + category + "]" ;
-        }
-        else 
-            return "Book [id=" + id + ", title=" + title + ", author=" + author + ", years=" + years + ", price=" + price
+        if (this.category != null) {
+            return "Book [id=" + id + ", title=" + title + ", author=" + author + ", years=" + years + ", price="
+                    + price
+                    + ", isbn=" + isbn + ", category=" + category + "]";
+        } else
+            return "Book [id=" + id + ", title=" + title + ", author=" + author + ", years=" + years + ", price="
+                    + price
                     + ", isbn=" + isbn + "]";
     }
 
