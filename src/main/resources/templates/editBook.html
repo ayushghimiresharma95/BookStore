@@ -27,7 +27,7 @@
 
     <div style="clear: both; display: block; height: 10px;"></div>
     <label for="deplist">Category:</label>
-    <select id="deplist" th:field="*{category}" class="form-control">
+    <select id="deplist" th:field="*{category.categoryid}" class="form-control">
       <option th:each="category: ${categorys}" th:value="${category.categoryid}" th:text="${category.name}"></option>
     </select>
 
