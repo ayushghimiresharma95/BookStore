@@ -1,5 +1,8 @@
 package fi.haagaHelia.BookStore;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,7 +15,7 @@ import fi.haagaHelia.BookStore.Domain.BookstoreRepositary;
 
 @SpringBootApplication
 public class BookStoreApplication {
-
+	private static final Logger log = LoggerFactory.getLogger(BookStoreApplication.class);
 	public static void main(String[] args) {
 		SpringApplication.run(BookStoreApplication.class, args);
 	}
@@ -34,6 +37,8 @@ public class BookStoreApplication {
 			repositary.save(b1);
 			repositary.save(b2);
 			repositary.save(b3);
+
+
 		};
 	}
 
