@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import fi.haagaHelia.BookStore.Domain.Book;
@@ -21,12 +22,17 @@ import fi.haagaHelia.BookStore.Domain.CategoryRepositary;
 
 @Controller
 public class BookController {
+    
 
     @Autowired
     private BookstoreRepositary repositary;
     @Autowired
-    private CategoryRepositary cRepositary;
+    private CategoryRepositary cRepositary;        
 
+   @RequestMapping("/login")
+    public String login(){
+        return "login";
+    }
     @GetMapping("/index")
     public String AddingBooks(Model model) {
         model.addAttribute("books", new Book());
