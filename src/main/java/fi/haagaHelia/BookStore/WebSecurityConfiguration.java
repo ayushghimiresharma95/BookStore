@@ -25,11 +25,11 @@ public class WebSecurityConfiguration {
     private UserDetailServiceImpl userDetailsService;
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http, HandlerMappingIntrospector introspector) throws Exception{
-        MvcRequestMatcher.Builder mvcMatchBuilder = new MvcRequestMatcher.Builder(introspector);
-        return http.authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests.requestMatchers("/content/**").permitAll()
-        .requestMatchers("/booklist/**").hasRole("ADMIN")
-        .requestMatchers("/booklist/**").hasRole("USER")
-        .requestMatchers("/**").permitAll())
+        MvcRequestMatcher.Builder mvcMatcherBuilder = new MvcRequestMatcher.Builder(introspector);
+        return http
+        .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
+            .requestMatchers(mvcMatcherBuilder.pattern("/css/**"), mvcMatcherBuilder.pattern("/signup"), mvcMatcherBuilder.pattern("/saveuser")).permitAll()
+            .anyRequest().authenticated())
         .formLogin(form -> form.loginPage("/login").defaultSuccessUrl("/booklist", true).permitAll())
         .logout(logout -> logout.permitAll()).build();
     
@@ -40,13 +40,7 @@ public class WebSecurityConfiguration {
     }
     @Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth
-            .inMemoryAuthentication()
-                .passwordEncoder(bcryptPasswordEncoder())
-                .withUser("user").password(bcryptPasswordEncoder().encode("user")).roles("USER")
-            .and()
-                .passwordEncoder(bcryptPasswordEncoder())
-                .withUser("admin").password(bcryptPasswordEncoder().encode("admin")).roles("ADMIN");
-	}
+		auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
 }
 
+}

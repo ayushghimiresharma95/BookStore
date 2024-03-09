@@ -5,6 +5,7 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,13 +20,13 @@ public class UserConroller {
     @Autowired
     private UserRepository repositary;
 
-    @RequestMapping(value = "signup")
+    @GetMapping(value = "/signup")
     public String addStudent(Model model){
         model.addAttribute("signupform", new SignupForm() );
         return "signup";
     }
 
-    @PostMapping("savuser")
+    @PostMapping("/saveuser")
     public String save(@Valid @ModelAttribute("/signupform") SignupForm signupform,BindingResult  bindingResult){
         System.out.println(bindingResult.toString()) ;
 
@@ -39,8 +40,9 @@ public class UserConroller {
                 newUser.setPasswordHash(hashPwd);
                 newUser.setUsername(signupform.getUsername());
                 newUser.setRole("User");
+                newUser.setEmail(signupform.getEmail());
 
-                if (repositary.findByUsername(signupform.getUsername()) == null){
+                if (repositary.findByUsername(signupform.getUsername()) == null && repositary.findByEmail(signupform.getEmail()) == null){
                     repositary.save(
                         newUser
                     );
@@ -56,7 +58,7 @@ public class UserConroller {
             }
         }
         else {
-            return "singup" ;
+            return "signup" ;
         }
         return "redirect:/login" ;
     }

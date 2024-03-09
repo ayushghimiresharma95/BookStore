@@ -11,7 +11,10 @@ import org.springframework.context.annotation.Bean;
 import fi.haagaHelia.BookStore.Domain.Book;
 import fi.haagaHelia.BookStore.Domain.Category;
 import fi.haagaHelia.BookStore.Domain.CategoryRepositary;
+import fi.haagaHelia.BookStore.Domain.User;
+import fi.haagaHelia.BookStore.Domain.UserRepository;
 import fi.haagaHelia.BookStore.Domain.BookstoreRepositary;
+import java.util.Arrays;
 
 @SpringBootApplication
 public class BookStoreApplication {
@@ -21,7 +24,7 @@ public class BookStoreApplication {
 	}
 
 	@Bean
-	CommandLineRunner demo(BookstoreRepositary repositary,CategoryRepositary cRepositary ){
+	CommandLineRunner demo(BookstoreRepositary repositary,CategoryRepositary cRepositary,UserRepository urepository ){
 		return (args) -> {
 			Category category1 = new Category("Action") ;
 			Category category2 = new Category("Romance") ;
@@ -38,7 +41,10 @@ public class BookStoreApplication {
 			repositary.save(b2);
 			repositary.save(b3);
 
-
+			User user1 = new User("user", "$2a$06$3jYRJrg0ghaaypjZ/.g4SethoeA51ph3UD4kZi9oPkeMTpjKU5uo6", "USER","ayushghimire95@gmail.com");
+			User user2 = new User("admin", "$2a$08$bCCcGjB03eulCWt3CY0AZew2rVzXFyouUolL5dkL/pBgFkUH9O4J2", "ADMIN","ayushfgimir");
+			urepository.save(user1);
+			urepository.save(user2);
 		};
 	}
 

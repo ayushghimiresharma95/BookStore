@@ -9,6 +9,11 @@
 
 <body>
     <h1>Book List</h1>
+    <div class="col-md-4" style="padding:20px 0">
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-danger"/>
+		</form>
+	</div>
     <table border="1" class="table table-striped">
         <thead>
             <tr>
